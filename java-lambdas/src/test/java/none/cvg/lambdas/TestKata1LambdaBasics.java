@@ -29,20 +29,15 @@ public class TestKata1LambdaBasics {
      * @see IntegerPair
      */
     @Test
-    @Tag("TODO")
+    @Tag("PASSING")
     @Order(1)
     public void newObjectUsingLambdas() {
         IntegerPair classic = new IntegerPair();
 
-        // TODO:
+        // DONE:
         //  Replace the anonymous class with a lambda.
         //  Hint: () -> new object()
-        IntegerPairFactory integerPairFactory = new IntegerPairFactory() {
-            @Override
-            public IntegerPair get() {
-                return new IntegerPair();
-            }
-        };
+        IntegerPairFactory integerPairFactory = () -> new IntegerPair();
 
         assertEquals(classic, integerPairFactory.get(),
                 "Both objects should be equal");
@@ -53,20 +48,15 @@ public class TestKata1LambdaBasics {
      * @see IntegerPair
      */
     @Test
-    @Tag("TODO")
+    @Tag("PASSING")
     @Order(2)
     public void newObjectUsingMethodReferences() {
         IntegerPair classic = new IntegerPair();
 
-        // TODO:
+        // DONE:
         //  Replace the anonymous class with a method reference.
         //  Hint: () -> Object::new
-        IntegerPairFactory integerPairFactory = new IntegerPairFactory() {
-            @Override
-            public IntegerPair get() {
-                return new IntegerPair();
-            }
-        };
+        IntegerPairFactory integerPairFactory = IntegerPair::new;
 
         assertEquals(classic, integerPairFactory.get(),
                 "Both objects should be equal");
@@ -77,23 +67,18 @@ public class TestKata1LambdaBasics {
      * @see Function
      */
     @Test
-    @Tag("TODO")
+    @Tag("PASSING")
     @Order(3)
     public void methodCallAsLambda() {
         IntegerPair integerPair = new IntegerPair();
 
-        // TODO:
+        // DONE:
         //  Replace the below anonymous class with a lambda call
         //  Most IDEs allow for an automatic conversion
         //  Hint: object -> object.method()
-        Function<IntegerPair, Integer> getSecond = new Function<>() {
-            @Override
-            public Integer apply(IntegerPair integerPair) {
-                return integerPair.getSecond();
-            }
-        };
+        Function<IntegerPair, Integer> getSecond = (intPair) -> intPair.getSecond();
 
-        // TODO:
+        // DONE:
         //  Fix the assertion to return the correct expectation (6)
         //  Check API: java.util.function.Function.apply(?)
         assertEquals(6, getSecond.apply(integerPair),
@@ -105,23 +90,18 @@ public class TestKata1LambdaBasics {
      * @see Function
      */
     @Test
-    @Tag("TODO")
+    @Tag("PASSING")
     @Order(4)
     public void methodCallAsMethodReference() {
         IntegerPair integerPair = new IntegerPair();
 
-        // TODO:
+        // DONE:
         //  Replace the below anonymous class with a method reference
         //  Most IDEs allow for an automatic conversion (no parenthesis for method)
         //  Hint: object -> Object::method
-        Function<IntegerPair, Integer> getSecond = new Function<>() {
-            @Override
-            public Integer apply(IntegerPair integerPair) {
-                return integerPair.getSecond();
-            }
-        };
+        Function<IntegerPair, Integer> getSecond = IntegerPair::getSecond;
 
-        // TODO:
+        // DONE:
         //  Fix the assertion to return the correct expectation (6)
         //  Check API: java.util.function.Function.apply(?)
         assertEquals(6, getSecond.apply(integerPair),
@@ -129,21 +109,16 @@ public class TestKata1LambdaBasics {
     }
 
     @Test
-    @Tag("TODO")
+    @Tag("PASSING")
     @Order(5)
     public void convertAnonymousClassToLambda() {
 
         final AtomicInteger counter = new AtomicInteger();
 
-        // TODO:
+        // DONE:
         //  Replace the anonymous class with a lambda. Hint: () ->
         //  The addAndGet() needs to be updated to add 1 instead of 0.
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                counter.addAndGet(0);
-            }
-        };
+        Runnable runnable = () -> counter.addAndGet(1);
 
         runnable.run();
 
@@ -151,7 +126,7 @@ public class TestKata1LambdaBasics {
     }
 
     @Test
-    @Tag("TODO")
+    @Tag("PASSING")
     @Order(6)
     public void customFunctionWithLambda() {
 
@@ -159,12 +134,12 @@ public class TestKata1LambdaBasics {
 
         String s = Integer.toBinaryString(integer);
 
-        // TODO:
+        // DONE:
         //  Create a Function that maps any integer into a String using a lambda syntax
         //  Do not create a new method. Replace the empty String below to invoke a toBinaryString
         //  Check API: java.util.function.Function
         //  Check API: java.util.function.Function.apply(?)
-        Function<Integer, String> toBinaryStringFunction = i -> "";
+        Function<Integer, String> toBinaryStringFunction = i -> Integer.toBinaryString(i) ;
 
         assertEquals("1010",
                 toBinaryStringFunction.apply(10),
@@ -177,18 +152,18 @@ public class TestKata1LambdaBasics {
     }
 
     @Test
-    @Tag("TODO")
+    @Tag("PASSING")
     @Order(7)
     public void customFunctionWithMethodReference() {
 
-        // TODO:
+        // DONE:
         //  Create a Function that maps any integer into a String using a method reference
         //  Do not create a new method. Replace the lambda below to invoke a toBinaryString
         //  as a method reference
         //  Check API: java.util.function.Function
         //  Check API: java.util.function.Function.apply(?)
         //  Check API: java.lang.Integer.toBinaryString(?)
-        Function<Integer, String> toBinaryStringFunction = x -> "";
+        Function<Integer, String> toBinaryStringFunction = Integer::toBinaryString;
 
         assertEquals("1010",
                 toBinaryStringFunction.apply(10),
